@@ -9,7 +9,6 @@ const gallery = [
   { id: 2, cat: "Resorts",      image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=700&q=80", title: "Azure Resort",       loc: "Greater Noida",       wide: false },
   { id: 3, cat: "Interiors",    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80", title: "Luxe Living Room",   loc: "Indirapuram",         wide: false },
   { id: 4, cat: "Construction", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80", title: "The Summit Project", loc: "Crossings Republik",  wide: false },
-  { id: 5, cat: "Villas",       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80", title: "Pearl Villa",        loc: "Raj Nagar Extension", wide: false },
   { id: 6, cat: "Interiors",    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80", title: "Golden Suite",       loc: "Sector 62, Noida",    wide: true  },
   { id: 7, cat: "Resorts",      image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=700&q=80", title: "Palm Resort Villas", loc: "Haridwar",            wide: false },
   { id: 8, cat: "Construction", image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&q=80", title: "Heritage Heights",   loc: "Meerut Road",         wide: false },
@@ -160,7 +159,7 @@ export default function GallerySection() {
 
               // Normal row: 1, 2, or 3 cards — equal width columns
               const colClass =
-                row.items.length === 1 ? "grid-cols-1" :
+                row.items.length === 1 ? "grid-cols-2" :
                 row.items.length === 2 ? "grid-cols-2" :
                 "grid-cols-1 sm:grid-cols-3";
 
