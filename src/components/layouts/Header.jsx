@@ -21,134 +21,161 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* ── Smooth scroll helper ── */
   const handleNav = (label, href) => {
     setActive(label);
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    // small delay so mobile menu closes before scroll
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-black shadow-2xl shadow-black/40 py-3"
-          : "bg-black py-4"
+        scrolled ? "bg-black shadow-2xl shadow-black/50 py-2" : "bg-black py-3"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
 
-        {/* Logo */}
-        <motion.a
-          href="#home"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 group"
+        {/* ── Logo ── */}
+        <button
           onClick={() => handleNav("Home", "#home")}
+          className="flex items-center gap-2 flex-shrink-0 focus:outline-none"
+          aria-label="Go to top"
         >
           <img
             src="/logo.png"
             alt="First Key Homes"
-            className="h-12 w-auto object-contain"
+            className="h-10 sm:h-11 w-auto object-contain"
           />
-          <div className="hidden sm:block">
-            <p className="text-[#f9eb04] font-black text-lg leading-none tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <div className="flex flex-col leading-none">
+            <span
+              className="text-[#f9eb04] font-black tracking-wide text-sm sm:text-base"
+              style={{ fontFamily: "'Raleway', sans-serif" }}
+            >
               FIRST KEY
-            </p>
-            <p className="text-white/70 text-xs tracking-[0.3em] uppercase font-semibold">
-              Homes
-            </p>
+            </span>
+            <span
+              className="text-white/50 text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-semibold"
+              style={{ fontFamily: "'Raleway', sans-serif" }}
+            >
+              HOMES
+            </span>
           </div>
-        </motion.a>
+        </button>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        {/* ── Desktop Nav ── */}
+        <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
           {navLinks.map((link, i) => (
             <motion.button
               key={link.label}
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 * i, duration: 0.4 }}
+              transition={{ delay: 0.05 * i, duration: 0.35 }}
               onClick={() => handleNav(link.label, link.href)}
-              className={`relative px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors duration-200 ${
+              className={`relative px-4 py-2 text-xs font-bold tracking-widest uppercase transition-colors duration-200 focus:outline-none ${
                 active === link.label
                   ? "text-[#f9eb04]"
-                  : "text-white/70 hover:text-[#f9eb04]"
+                  : "text-white/60 hover:text-[#f9eb04]"
               }`}
               style={{ fontFamily: "'Raleway', sans-serif" }}
             >
               {link.label}
               {active === link.label && (
                 <motion.span
-                  layoutId="underline"
-                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-yellow-400 rounded-full"
+                  layoutId="nav-underline"
+                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#f9eb04] rounded-full"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
             </motion.button>
           ))}
         </nav>
 
-        {/* CTA + Hamburger */}
-        <div className="flex items-center gap-3">
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+        {/* ── Desktop CTA + Hamburger ── */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Desktop CTA */}
+          <button
             onClick={() => handleNav("Contact", "#contact")}
-            className="hidden sm:inline-flex items-center gap-2 bg-[#f9eb04] hover:bg-yellow-300 text-black font-bold text-xs uppercase tracking-widest px-5 py-2.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-yellow-400/30"
-            style={{ fontFamily: "'Raleway', sans-serif", clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))" }}
+            className="hidden sm:inline-flex items-center gap-2 bg-[#f9eb04] hover:bg-[#f9eb04] text-black font-black text-xs uppercase tracking-widest px-5 py-2.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f9eb04]/30 focus:outline-none"
+            style={{
+              fontFamily: "'Raleway', sans-serif",
+              clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
+            }}
           >
             Get in Touch
-          </motion.a>
+          </button>
 
-          {/* Hamburger */}
+          {/* Hamburger — mobile only */}
           <button
-            className="lg:hidden flex flex-col gap-1.5 p-2 group"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            className="lg:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
-            <span className={`block h-0.5 bg-yellow-400 transition-all duration-300 ${menuOpen ? "w-6 rotate-45 translate-y-2" : "w-6"}`} />
-            <span className={`block h-0.5 bg-yellow-400 transition-all duration-300 ${menuOpen ? "opacity-0 w-4" : "w-4"}`} />
-            <span className={`block h-0.5 bg-yellow-400 transition-all duration-300 ${menuOpen ? "w-6 -rotate-45 -translate-y-2" : "w-6"}`} />
+            <span
+              className={`block w-6 h-0.5 bg-[#f9eb04] rounded-full transition-all duration-300 origin-center ${
+                menuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 bg-[#f9eb04] rounded-full transition-all duration-300 ${
+                menuOpen ? "w-0 opacity-0" : "w-4 opacity-100"
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 bg-[#f9eb04] rounded-full transition-all duration-300 origin-center ${
+                menuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile Dropdown Menu ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            key="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-black border-t border-yellow-400/20 overflow-hidden"
+            transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:hidden overflow-hidden border-t border-[#f9eb04]/15 bg-black/98 backdrop-blur-md"
           >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <button
+            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col">
+              {navLinks.map((link, i) => (
+                <motion.button
                   key={link.label}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.04, duration: 0.22 }}
                   onClick={() => handleNav(link.label, link.href)}
-                  className={`text-left px-4 py-3 text-sm font-bold uppercase tracking-widest border-b border-white/5 transition-colors duration-200 ${
+                  className={`text-left px-3 py-3.5 text-sm font-bold uppercase tracking-widest border-b border-white/5 last:border-b-0 transition-colors duration-150 focus:outline-none flex items-center gap-3 ${
                     active === link.label
-                      ? "text-yellow-400"
-                      : "text-white/70 hover:text-yellow-400"
+                      ? "text-[#f9eb04]"
+                      : "text-white/60 hover:text-[#f9eb04]"
                   }`}
                   style={{ fontFamily: "'Raleway', sans-serif" }}
                 >
+                  {active === link.label && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f9eb04] flex-shrink-0" />
+                  )}
                   {link.label}
-                </button>
+                </motion.button>
               ))}
-              <a
-                href="#contact"
+
+              {/* Mobile CTA */}
+              <button
                 onClick={() => handleNav("Contact", "#contact")}
-                className="mt-3 text-center bg-yellow-400 text-black font-bold text-xs uppercase tracking-widest px-5 py-3 hover:bg-yellow-300 transition-colors duration-200"
+                className="mt-3 mb-1 text-center bg-[#f9eb04] hover:bg-[#f9eb04] text-black font-black text-xs uppercase tracking-widest px-5 py-3.5 transition-colors duration-200 focus:outline-none"
                 style={{ fontFamily: "'Raleway', sans-serif" }}
               >
                 Get in Touch
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
