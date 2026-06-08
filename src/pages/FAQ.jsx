@@ -80,10 +80,10 @@ export default function FAQSection() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { val: "500+", label: "Happy Clients" },
-                { val: "12+", label: "Years Experience" },
-                { val: "98%", label: "Satisfaction" },
-                { val: "3", label: "Contact Numbers" },
+                { val: "10K+", label: "Happy Clients" },
+                { val: "5+", label: "Years Experience" },
+                { val: "500", label: "Project Sold" },
+                { val: "10", label: "Total Projects" },
               ].map((s) => (
                 <div key={s.label} className="bg-white border border-black/8 px-4 py-4 text-center">
                   <p className="text-[#f9eb04] font-black text-2xl leading-none" style={{ fontFamily: "'Playfair Display', serif" }}>
