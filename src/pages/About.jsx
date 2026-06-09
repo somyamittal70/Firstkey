@@ -22,6 +22,24 @@ const highlights = [
   { icon: TreePalm, label: "Villas & Resorts" },
 ];
 
+const TEAM = [
+  {
+    name: "Leadership",
+    role: "Founder",
+    img: "/founder.png",
+  },
+  {
+    name: "Operations",
+    role: "Co-Founder",
+    img: "/co-founder.png",
+  },
+  {
+    name: "Sales Team",
+    role: "Head of Sales",
+    img: "/head.png",
+  },
+];
+
 export default function AboutSection() {
   return (
     <section
@@ -174,7 +192,7 @@ export default function AboutSection() {
               service to guide you through every step of your real estate
               journey, ensuring transparency, trust, and total peace of mind.
             </motion.p>
-            
+
             {/* Highlights grid */}
             <motion.div
               variants={fadeUp}
@@ -237,6 +255,65 @@ export default function AboutSection() {
             </motion.div>
           </motion.div>
         </div>
+      </div>
+
+      {/* ── Team Section ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28">
+        {/* Divider */}
+        <div className="flex items-center gap-4 mb-14">
+          <div className="flex-1 h-px bg-black" />
+          <span
+            className="text-black text-[30px] uppercase tracking-[0.3em] whitespace-nowrap font-bold"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            Our Leadership Team
+          </span>
+          <div className="flex-1 h-px bg-black" />
+        </div>
+
+        {/* Cards */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
+        >
+          {TEAM.map(({ name, role, img }) => (
+            <motion.div
+              key={role}
+              variants={fadeUp}
+              className="group flex flex-col items-center text-center"
+            >
+              {/* Image wrapper — fixed square */}
+              <div className="relative w-74 h-92 mb-5 overflow-hidden border border-black/10">
+                <img
+                  src={img}
+                  alt={name}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Yellow bottom bar on hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#f9eb04] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </div>
+
+              {/* Name */}
+              <p
+                className="text-black font-black text-xl mb-1 leading-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                {name}
+              </p>
+
+              {/* Role pill */}
+              <span
+                className="inline-block text-[10px] font-black uppercase tracking-[0.2em] text-black/40 border border-black/10 px-3 py-1"
+                style={{ fontFamily: "'Raleway', sans-serif" }}
+              >
+                {role}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
