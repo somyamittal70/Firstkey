@@ -45,7 +45,7 @@ const TEAM = [
   },
   {
     name: "Babita Prajapati",
-    role: "Sales Executive",
+    role: "Senior Sales Executive",
     img: "/m6.jpeg",
   },
   {
