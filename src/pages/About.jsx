@@ -24,19 +24,44 @@ const highlights = [
 
 const TEAM = [
   {
-    name: "Leadership",
+    name: "Balram Sharma",
     role: "Founder",
     img: "/founder.png",
   },
   {
-    name: "Operations",
+    name: "Sharadha Gupta",
     role: "Co-Founder",
     img: "/co-founder.png",
   },
   {
-    name: "Sales Team",
+    name: "Vaibhav Garg",
     role: "Head of Sales",
     img: "/head.png",
+  },
+  {
+    name: "Saurabh Choudhary",
+    role: "Head of Sales",
+    img: "/m1.jpeg",
+  },
+  {
+    name: "Neha Sharma",
+    role: "Sales Executive",
+    img: "/m2.jpeg",
+  },
+  {
+    name: "Shyam Sharma",
+    role: "Sales Executive",
+    img: "/m3.jpeg",
+  },
+  {
+    name: "Kamal Nagar",
+    role: "Sales Executive",
+    img: "/m4.jpeg",
+  },
+  {
+    name: "Anjali",
+    role: "Sales Executive",
+    img: "/m5.jpeg",
   },
 ];
 
@@ -277,7 +302,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-4 gap-6 sm:gap-8"
         >
           {TEAM.map(({ name, role, img }) => (
             <motion.div
