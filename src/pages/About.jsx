@@ -44,6 +44,11 @@ const TEAM = [
     img: "/m1.jpeg",
   },
   {
+    name: "Babita Prajapati",
+    role: "Sales Executive",
+    img: "/m6.jpeg",
+  },
+  {
     name: "Neha Sharma",
     role: "Sales Executive",
     img: "/m2.jpeg",
@@ -62,11 +67,6 @@ const TEAM = [
     name: "Anjali",
     role: "Sales Executive",
     img: "/m5.jpeg",
-  },
-  {
-    name: "Babita Prajapati",
-    role: "Sales Executive",
-    img: "/m6.jpeg",
   },
 ];
 
