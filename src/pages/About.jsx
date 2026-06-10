@@ -336,7 +336,7 @@ export default function AboutSection() {
 
               {/* Role pill */}
               <span
-                className="inline-block text-[8px] font-black uppercase tracking-[0.2em] text-black/40 border border-black/10 px-3 py-1"
+                className="inline-block text-[10px] font-black uppercase tracking-[0.2em] text-black/40 border border-black/10 px-3 py-1"
                 style={{ fontFamily: "'Raleway', sans-serif" }}
               >
                 {role}
