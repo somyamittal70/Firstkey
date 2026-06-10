@@ -63,6 +63,11 @@ const TEAM = [
     role: "Sales Executive",
     img: "/m5.jpeg",
   },
+  {
+    name: "Babita Prajapati",
+    role: "Sales Executive",
+    img: "/m6.jpeg",
+  },
 ];
 
 export default function AboutSection() {
@@ -302,7 +307,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 sm:grid-cols-4 gap-6 sm:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
         >
           {TEAM.map(({ name, role, img }) => (
             <motion.div
